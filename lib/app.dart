@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:plannify/core/router/route_manager.dart';
+import 'core/router/app_router.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -7,7 +9,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Plannify',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      debugShowCheckedModeBanner: false,
+      initialRoute: RouteManager.initialRoute,
+      onGenerateRoute: AppRouter.onGenerateRoute,
     );
   }
 }
