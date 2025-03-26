@@ -39,4 +39,11 @@ class ColorManager {
   // Component Colors
   static const Color divider = grayLight;
   static const Color border = grayLight;
+
+  // Shadow Colors
+  static const Color shadowLight = Color(0x1F000000); // 12% opacity
+  static const Color shadowDark = Color(0x4D000000); // 30% opacity
+
+  // Miscellaneous
+  static const Color transparent = Colors.transparent;
 }
