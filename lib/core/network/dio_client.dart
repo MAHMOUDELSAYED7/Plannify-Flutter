@@ -40,9 +40,9 @@ class DioClient {
     }
   }
 
-  Future<Response> put(String path, {dynamic data}) async {
+  Future<Response> patch(String path, {dynamic data}) async {
     try {
-      return await _dio.put(path, data: data);
+      return await _dio.patch(path, data: data);
     } on DioException catch (err) {
       throw NetworkException(
         err.message ?? 'Network error',
