@@ -1,44 +1,50 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:plannify/core/security/storage_key.dart';
 
 class SecureStorageManager {
+  const SecureStorageManager._();
+
   static final FlutterSecureStorage _storage = FlutterSecureStorage();
 
-  //! Key constants
-  static String authTokenKey = dotenv.env['AUTH_TOKEN']!;
-  static String userIdKey = dotenv.env['USER_ID']!;
-  static const String themeModeKey = 'theme_mode';
-
-  //! Saves auth token securely
+  //!------------------------------------------------------ Token
   static Future<void> saveAuthToken(String token) async =>
-      await _storage.write(key: authTokenKey, value: token);
+      await _storage.write(key: StorageKeyManager.authTokenKey, value: token);
 
-  //! Retrieves auth token
   static Future<String?> getAuthToken() async =>
-      await _storage.read(key: authTokenKey);
+      await _storage.read(key: StorageKeyManager.authTokenKey);
 
-  //! Saves user ID
+  //!------------------------------------------------------ User ID
   static Future<void> saveUserId(String userId) async =>
-      await _storage.write(key: userIdKey, value: userId);
+      await _storage.write(key: StorageKeyManager.userIdKey, value: userId);
 
-  //! Retrieves user ID
   static Future<String?> getUserId() async =>
-      await _storage.read(key: userIdKey);
+      await _storage.read(key: StorageKeyManager.userIdKey);
 
-  //! Saves theme preference
-  static Future<void> saveThemeMode(bool isDarkMode) async =>
-      await _storage.write(key: themeModeKey, value: isDarkMode.toString());
+  //* ------------------------------------------------------ User Data
+  static Future<void> clearUserData() async {
+    await _storage.delete(key: StorageKeyManager.authTokenKey);
+    await _storage.delete(key: StorageKeyManager.userIdKey);
+  }
 
-  //! Retrieves theme preference
+  //!------------------------------------------------------ Theme Mode
+  static Future<void> saveThemeMode(bool isDarkMode) async => await _storage
+      .write(key: StorageKeyManager.themeModeKey, value: isDarkMode.toString());
+
   static Future<bool?> getThemeMode() async {
-    final value = await _storage.read(key: themeModeKey);
+    final value = await _storage.read(key: StorageKeyManager.themeModeKey);
     return value?.toLowerCase() == 'true';
   }
 
-  //! Clears all secure data (logout)
+  //!------------------------------------------------------ Localization
+  static Future<void> saveLocalization(String locale) async => await _storage
+      .write(key: StorageKeyManager.localizationKey, value: locale);
+
+  static Future<String?> getLocalization() async =>
+      await _storage.read(key: StorageKeyManager.localizationKey);
+
+  //?------------------------------------------------------ General Methods
   static Future<void> clearAll() async => await _storage.deleteAll();
 
-  //! original implementations
   static Future<void> writeData(String key, String value) async =>
       await _storage.write(key: key, value: value);
 
