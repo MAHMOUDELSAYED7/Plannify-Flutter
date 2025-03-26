@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:plannify/core/router/route_manager.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:plannify/core/router/routes.dart';
+import 'package:plannify/core/themes/app_themes.dart';
 import 'core/router/app_router.dart';
 
 class MyApp extends StatelessWidget {
@@ -7,11 +9,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Plannify',
-      debugShowCheckedModeBanner: false,
-      initialRoute: RouteManager.initialRoute,
-      onGenerateRoute: AppRouter.onGenerateRoute,
+    return ScreenUtilInit(
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder:
+          (_, child) => MaterialApp(
+            builder: (context, widget) {
+              final mediaQueryData = MediaQuery.of(context);
+              final scaledMediaQueryData = mediaQueryData.copyWith(
+                textScaler: TextScaler.noScaling,
+              );
+              return MediaQuery(data: scaledMediaQueryData, child: widget!);
+            },
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.lightTheme,
+            initialRoute: RouteManager.initialRoute,
+            onGenerateRoute: AppRouter.onGenerateRoute,
+          ),
     );
   }
 }
