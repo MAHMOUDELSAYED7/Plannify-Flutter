@@ -1,9 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:plannify/core/errors/app_exceptions.dart';
 import 'package:plannify/core/errors/error_handler.dart';
 
-import '../../../../core/errors/failure.dart';
 import '../../../../data/models/auth_model.dart';
 import '../../../../data/repositories/auth_repository_impl.dart';
 

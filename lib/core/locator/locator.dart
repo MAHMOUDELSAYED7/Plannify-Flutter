@@ -1,10 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:plannify/presentation/viewmodel/onboarding_viewmodel.dart';
 
 import '../../data/repositories/auth_repository_impl.dart';
 import '../../data/source/auth_remote_data_source.dart';
 
+import '../../presentation/cubit/onboarding/onboarding_cubit.dart';
+import '../../presentation/viewmodel/splash_viewmodel.dart';
 import '../network/dio_client.dart';
 import '../security/secure_storage_repository.dart';
 
@@ -28,4 +31,11 @@ Future<void> setupLocator() async {
       connectionChecker: locator<InternetConnectionChecker>(),
     ),
   );
+
+  // ViewModels
+  locator.registerLazySingleton(() => SplashViewModel());
+  locator.registerLazySingleton(() => OnboardingViewModel());
+
+  // Cubits
+  locator.registerFactory(() => OnboardingCubit());
 }
