@@ -63,17 +63,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       title: "Get Started",
                       onPressed:
                           () =>
-                              context.pushReplacementNamed(RouteManager.email),
+                              context.pushReplacementNamed(RouteManager.login),
                     )
                   else
                     MyElevatedButton(
-                      title: "Next",
+                      title: "Continue",
                       onPressed: _viewModel.nextPage,
                     ),
                 ],
               ).center().positionedBottom(bottom: context.height * 0.03),
               InkWell(
-                onTap: () => context.pushReplacementNamed(RouteManager.email),
+                onTap: () => context.pushReplacementNamed(RouteManager.login),
                 child: Text(
                   "Skip",
                   style: context.textTheme.bodyMedium?.copyWith(

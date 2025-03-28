@@ -25,8 +25,14 @@ class OnboardingViewModel {
     OnboardingPage(
       title: "Find the practicality in making your todo list",
       description:
-          "Easy-to-understand user interface  that makes you more comfortable when you want to create a task or to do list, Todyapp can also improve productivity",
+          "Easy-to-understand user interface that makes you more comfortable when you want to create a task or to do list, Todyapp can also improve productivity",
       image: ImageManager.onPordingSecond,
+    ),
+    OnboardingPage(
+      title: "Welcome to Plannify",
+      description:
+          "Start your journey towards better organization and productivity. Plannify is here to simplify your tasks and help you achieve your goals effortlessly.",
+      image: ImageManager.onPordingThird,
     ),
   ];
 

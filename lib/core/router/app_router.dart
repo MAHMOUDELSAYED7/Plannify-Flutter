@@ -6,6 +6,7 @@ import 'package:plannify/presentation/view/onboarding_screens.dart';
 
 // import '../../presentation/view/home.dart';
 // import '../../presentation/view/login.dart';
+import '../../presentation/view/login_screen.dart';
 import '../../presentation/view/splash_screen.dart';
 import 'custom_page_transitions.dart';
 import 'routes.dart';
@@ -23,8 +24,8 @@ class AppRouter {
             child: const OnboardingScreen(),
           ),
         );
-      // case RouteManager.login:
-      //   return CustomPageTransitions.fadeForwards(LoginPage());
+      case RouteManager.login:
+        return CustomPageTransitions.fadeForwards(LoginScreen());
       // case RouteManager.home:
       //   return CustomPageTransitions.fadeForwards(HomePage());
 
