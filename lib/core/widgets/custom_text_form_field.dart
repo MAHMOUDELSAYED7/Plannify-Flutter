@@ -68,22 +68,27 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
           onSaved: widget.onSaved,
           onChanged: widget.onChanged,
           decoration: InputDecoration(
+            errorStyle: context.textTheme.bodyMedium?.copyWith(
+              color: ColorManager.error,
+            ),
+            errorMaxLines: 2,
             hintText: widget.hintText,
-            suffixIcon: widget.obscureText == true
-                ? IconButton(
-                    icon: ImageHandler.image(
-                      isObscure
-                          ? ImageManager.nonVisibleIcon
-                          : ImageManager.visibleIcon,
-                      color: ColorManager.grayMedium,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        isObscure = !isObscure;
-                      });
-                    },
-                  )
-                : null,
+            suffixIcon:
+                widget.obscureText == true
+                    ? IconButton(
+                      icon: ImageHandler.image(
+                        isObscure
+                            ? ImageManager.nonVisibleIcon
+                            : ImageManager.visibleIcon,
+                        color: ColorManager.grayMedium,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          isObscure = !isObscure;
+                        });
+                      },
+                    )
+                    : null,
           ),
         ),
       ],

@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:plannify/core/errors/error_handler.dart';
 
 import '../../../../data/models/auth_model.dart';
 import '../../../../data/repositories/auth_repository_impl.dart';
@@ -17,7 +16,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     final result = await repository.register(request);
     result.fold(
       (failure) =>
-          emit(RegisterError(ErrorHandler.handleError(failure).message)),
+          emit(RegisterError(failure.message)),
       (response) => emit(RegisterSuccess(response)),
     );
   }

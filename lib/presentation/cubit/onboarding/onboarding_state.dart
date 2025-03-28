@@ -9,7 +9,7 @@ class OnboardingState {
   const OnboardingState({
     this.currentPage = 0,
     this.isLastPage = false,
-    this.pageCount = 2, // Should match your page count
+    this.pageCount = 3,
   });
 
   OnboardingState copyWith({
