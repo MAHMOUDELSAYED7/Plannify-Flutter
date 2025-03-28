@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:plannify/core/errors/error_handler.dart';
 
 import '../../../../data/models/auth_model.dart';
 import '../../../../data/repositories/auth_repository_impl.dart';
@@ -16,8 +15,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     emit(ForgotPasswordLoading());
     final result = await repository.forgotPassword(request);
     result.fold(
-      (failure) =>
-          emit(ForgotPasswordError(ErrorHandler.handleError(failure).message)),
+      (failure) => emit(ForgotPasswordError(failure.message)),
       (response) => emit(ForgotPasswordSuccess(response)),
     );
   }

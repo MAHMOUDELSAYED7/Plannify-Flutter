@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:plannify/core/locator/locator.dart';
-import 'package:plannify/presentation/cubit/onboarding/onboarding_cubit.dart';
-import 'package:plannify/presentation/view/onboarding_screens.dart';
+import 'package:plannify/presentation/view/forgot_password_screen.dart';
 
-// import '../../presentation/view/home.dart';
-// import '../../presentation/view/login.dart';
+import '../../presentation/cubit/auth/forgot_password/forgot_password_cubit.dart';
+import '../../presentation/cubit/auth/login/login_cubit.dart';
+import '../../presentation/cubit/auth/register/register_cubit.dart';
+import '../../presentation/cubit/onboarding/onboarding_cubit.dart';
 import '../../presentation/view/login_screen.dart';
+import '../../presentation/view/onboarding_screens.dart';
+import '../../presentation/view/register_screen.dart';
 import '../../presentation/view/splash_screen.dart';
+import '../locator/locator.dart';
 import 'custom_page_transitions.dart';
 import 'routes.dart';
 
@@ -25,9 +28,26 @@ class AppRouter {
           ),
         );
       case RouteManager.login:
-        return CustomPageTransitions.fadeForwards(LoginScreen());
-      // case RouteManager.home:
-      //   return CustomPageTransitions.fadeForwards(HomePage());
+        return CustomPageTransitions.fadeForwards(
+          BlocProvider(
+            create: (_) => locator<LoginCubit>(),
+            child: LoginScreen(),
+          ),
+        );
+      case RouteManager.register:
+        return CustomPageTransitions.fadeForwards(
+          BlocProvider(
+            create: (_) => locator<RegisterCubit>(),
+            child: RegisterScreen(),
+          ),
+        );
+      case RouteManager.forgotPassword:
+        return CustomPageTransitions.fadeForwards(
+          BlocProvider(
+            create: (_) => locator<ForgotPasswordCubit>(),
+            child: const ForgotPasswordScreen(),
+          ),
+        );
 
       default:
         return MaterialPageRoute(

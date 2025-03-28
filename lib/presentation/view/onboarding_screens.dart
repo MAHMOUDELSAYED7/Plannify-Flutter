@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plannify/core/locator/locator.dart';
 import 'package:plannify/core/router/routes.dart';
 import 'package:plannify/core/utils/extensions/extensions.dart';
+import 'package:plannify/core/widgets/custom_text_button.dart';
 
-import '../../core/themes/colors.dart';
 import '../../core/widgets/custom_elevated_button.dart';
 import '../cubit/onboarding/onboarding_cubit.dart';
 import '../viewmodel/onboarding_viewmodel.dart';
@@ -72,14 +72,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                 ],
               ).center().positionedBottom(bottom: context.height * 0.03),
-              InkWell(
+              MyTextButton(
+                title: "Skip",
                 onTap: () => context.pushReplacementNamed(RouteManager.login),
-                child: Text(
-                  "Skip",
-                  style: context.textTheme.bodyMedium?.copyWith(
-                    color: ColorManager.primary,
-                  ),
-                ),
               ).positionedTopRight(top: 24),
             ],
           ).withAllPadding(24);

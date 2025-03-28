@@ -23,6 +23,7 @@ class AppTheme {
         ),
       ),
 
+      //-----------------------------------------------------------//* OUTLINED BUTTON
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           shape: RoundedRectangleBorder(
@@ -110,16 +111,19 @@ class AppTheme {
         hintStyle: const TextStyle(color: ColorManager.grayMedium),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
-          borderSide: const BorderSide(color: ColorManager.error),
+          borderSide: const BorderSide(color: ColorManager.error, width: 1.5),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
-          borderSide: const BorderSide(color: ColorManager.error),
+          borderSide: const BorderSide(color: ColorManager.error, width: 1.5),
         ),
 
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
-          borderSide: const BorderSide(color: ColorManager.grayMedium),
+          borderSide: const BorderSide(
+            color: ColorManager.grayMedium,
+            width: 1.5,
+          ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),

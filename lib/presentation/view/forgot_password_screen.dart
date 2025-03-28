@@ -4,55 +4,54 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plannify/core/utils/extensions/extensions.dart';
 import 'package:plannify/core/utils/helpers/toast_message.dart';
 import 'package:plannify/core/widgets/custom_text_button.dart';
+import 'package:plannify/presentation/cubit/auth/forgot_password/forgot_password_cubit.dart';
+import 'package:plannify/presentation/viewmodel/forgot_password_viewmodel.dart';
 
 import '../../core/constants/font_size.dart';
 import '../../core/locator/locator.dart';
-import '../../core/router/routes.dart';
 import '../../core/themes/colors.dart';
 import '../../core/widgets/custom_elevated_button.dart';
 import '../../core/widgets/custom_text_form_field.dart';
-import '../cubit/auth/login/login_cubit.dart';
-import '../viewmodel/login_viewmodel.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class ForgotPasswordScreen extends StatefulWidget {
+  const ForgotPasswordScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  late final LoginViewModel _viewModel;
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  late final ForgotPasswordViewModel _viewModel;
 
   @override
   void initState() {
     super.initState();
-    _viewModel = locator<LoginViewModel>();
+    _viewModel = locator<ForgotPasswordViewModel>();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginCubit, LoginState>(
+    return BlocListener<ForgotPasswordCubit, ForgotPasswordState>(
       bloc: _viewModel.cubit,
       listener: (context, state) {
-        if (state is LoginError) {
+        if (state is ForgotPasswordError) {
           ToastHelper.showCustomToast(state.message);
         }
-        if (state is LoginSuccess) {
-          ToastHelper.showCustomToast('Login successful!');
+        if (state is ForgotPasswordSuccess) {
+          ToastHelper.showCustomToast('Verification email sent!');
         }
       },
       child: Scaffold(
         body: Column(
           children: [
             Text(
-              'Welcome Back!',
+              'Forgot Password',
               style: context.textTheme.bodyLarge?.copyWith(
                 fontSize: FontSizeManager.large + 4.sp,
               ),
             ).center().withOnlyPadding(top: 50.h),
             Text(
-              'please Log in to access your account',
+              'Please enter your email to reset your password',
               style: context.textTheme.bodyMedium?.copyWith(
                 fontSize: FontSizeManager.medium,
                 color: ColorManager.grayDark,
@@ -69,41 +68,33 @@ class _LoginScreenState extends State<LoginScreen> {
                     hintText: 'Enter your email',
                     validator: _viewModel.formValidationManager.validateEmail,
                   ).withOnlyPadding(bottom: 16.h),
-                  MyTextFormField(
-                    title: 'Password',
-                    hintText: 'Enter your password',
-                    obscureText: true,
-                    onSaved: (val) => _viewModel.password = val,
-                    validator:
-                        _viewModel.formValidationManager.validatePassword,
-                  ).withOnlyPadding(bottom: 16.h),
-                  MyTextButton(
-                    title: 'Forgot Password?',
-                    onTap: () => context.pushNamed(RouteManager.forgotPassword),
-                  ).alignCenterRight(),
-                  MyTextButton(
-                    title: 'Create an account?',
-                    onTap: () => context.pushNamed(RouteManager.register),
-                  ).alignCenterRight(),
                 ],
               ),
             ),
+            MyTextButton(
+              title: 'Back to Login?',
+              onTap: () => context.back(),
+            ).alignCenterRight(),
           ],
         ).withAllPadding(24),
-        bottomNavigationBar: BlocBuilder<LoginCubit, LoginState>(
-          bloc: _viewModel.cubit,
-          builder: (context, state) {
-            return MyElevatedButton(
-              onPressed: state is LoginLoading ? null : _viewModel.login,
-              title: 'Login',
-              isLoading: state is LoginLoading,
-            ).withOnlyPadding(
-              bottom: context.height * 0.03 + 24,
-              left: 24,
-              right: 24,
-            );
-          },
-        ),
+        bottomNavigationBar:
+            BlocBuilder<ForgotPasswordCubit, ForgotPasswordState>(
+              bloc: _viewModel.cubit,
+              builder: (context, state) {
+                return MyElevatedButton(
+                  onPressed:
+                      state is ForgotPasswordLoading
+                          ? null
+                          : _viewModel.forgotPassword,
+                  title: 'Forgot Password',
+                  isLoading: state is ForgotPasswordLoading,
+                ).withOnlyPadding(
+                  bottom: context.height * 0.03 + 24,
+                  left: 24,
+                  right: 24,
+                );
+              },
+            ),
       ),
     );
   }
