@@ -11,7 +11,7 @@ class AppTheme {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           textStyle: TextStyle(
-            fontSize: FontSizeManager.medium,
+            fontSize: FontSizeManager.medium + 2.sp,
             fontFamily: FontFamilyManager.sfProDisplay,
           ),
           fixedSize: Size(double.maxFinite, 54.h),
@@ -98,19 +98,36 @@ class AppTheme {
 
       //--------------------------------------------------//* INPUT DECORATION Text Field
       inputDecorationTheme: InputDecorationTheme(
-        // filled: false,
-        // isDense: true,
-        // fillColor: ColorManager.grey.withOpacity(0.12),
+        filled: false,
+        isDense: true,
+        fillColor: ColorManager.grayLight,
         contentPadding: EdgeInsets.only(
           left: 10,
           right: 10,
-          top: 13.h,
-          bottom: 13.h,
+          top: 14.3.h,
+          bottom: 14.3.h,
         ),
-        hintStyle: const TextStyle(color: ColorManager.white),
-        border: InputBorder.none,
-        enabledBorder: InputBorder.none,
-        focusedBorder: InputBorder.none,
+        hintStyle: const TextStyle(color: ColorManager.grayMedium),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.r),
+          borderSide: const BorderSide(color: ColorManager.error),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.r),
+          borderSide: const BorderSide(color: ColorManager.error),
+        ),
+
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.r),
+          borderSide: const BorderSide(color: ColorManager.grayMedium),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.r),
+          borderSide: const BorderSide(
+            color: ColorManager.grayMedium,
+            width: 2,
+          ),
+        ),
       ),
     );
   }

@@ -23,7 +23,7 @@ class DioClient {
       return await _dio.get(path);
     } on DioException catch (err) {
       throw NetworkException(
-        err.message ?? 'Network error',
+        err.response?.data['message'] ?? 'Network error',
         err.response?.statusCode,
       );
     }
@@ -34,7 +34,7 @@ class DioClient {
       return await _dio.post(path, data: data);
     } on DioException catch (err) {
       throw NetworkException(
-        err.message ?? 'Network error',
+        err.response?.data['message'] ?? 'Network error',
         err.response?.statusCode,
       );
     }
@@ -45,7 +45,7 @@ class DioClient {
       return await _dio.patch(path, data: data);
     } on DioException catch (err) {
       throw NetworkException(
-        err.message ?? 'Network error',
+        err.response?.data['message'] ?? 'Network error',
         err.response?.statusCode,
       );
     }
@@ -56,7 +56,7 @@ class DioClient {
       return await _dio.delete(path, data: data);
     } on DioException catch (err) {
       throw NetworkException(
-        err.message ?? 'Network error',
+        err.response?.data['message'] ?? 'Network error',
         err.response?.statusCode,
       );
     }

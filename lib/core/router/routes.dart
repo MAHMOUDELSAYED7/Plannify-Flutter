@@ -3,7 +3,6 @@ class RouteManager {
 
   static const String initialRoute = '/';
   static const String onboarding = '/onboarding';
-  static const String email = '/email';
   static const String login = '/login';
   static const String register = '/register';
   static const String verifyOtp = '/verify-otp';
