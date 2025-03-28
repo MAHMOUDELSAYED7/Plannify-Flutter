@@ -12,8 +12,8 @@ class ImageManager {
 
   static const String settingsIcon = 'assets/images/svg/settings-icon.svg';
   static const String emailIcon = 'assets/images/svg/email-icon.svg';
-  static const String passwordIcon = 'assets/images/svg/visible-icon.svg';
-  static const String eyeIcon = 'assets/images/svg/non-visible-icon.svg';
+  static const String visibleIcon = 'assets/images/svg/visible-icon.svg';
+  static const String nonVisibleIcon = 'assets/images/svg/non-visible-icon.svg';
 
   static const String simmerSVG = 'assets/images/svg/shimmer-svg.svg';
 }
