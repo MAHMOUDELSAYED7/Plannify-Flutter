@@ -8,7 +8,7 @@ class ImageManager {
   static const String onPordingThird =
       'assets/images/png/Onboarding-Image-3.png';
 
-  static const String splashLogoIcon = 'assets/images/svg/Logo-Onboarding.svg';
+  static const String splashLogo = 'assets/images/svg/Logo-Onboarding.svg';
 
   static const String settingsIcon = 'assets/images/svg/settings-icon.svg';
   static const String emailIcon = 'assets/images/svg/email-icon.svg';
