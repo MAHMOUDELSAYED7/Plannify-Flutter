@@ -8,6 +8,7 @@ import 'package:plannify/presentation/viewmodel/register_viewmodel.dart';
 
 import '../../core/constants/font_size.dart';
 import '../../core/locator/locator.dart';
+import '../../core/router/routes.dart';
 import '../../core/themes/colors.dart';
 import '../../core/widgets/custom_elevated_button.dart';
 import '../../core/widgets/custom_text_form_field.dart';
@@ -37,7 +38,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ToastHelper.showCustomToast(state.message);
         }
         if (state is RegisterSuccess) {
-          ToastHelper.showCustomToast('Register successful, Verify your email');
+          ToastHelper.showCustomToast(
+            state.response.message ?? 'Verification code sent to your email!',
+          );
+          context.pushNamedAndRemoveUntil(
+            RouteManager.verifyOtp,
+            arguments: _viewModel.email,
+          );
         }
       },
       child: Scaffold(

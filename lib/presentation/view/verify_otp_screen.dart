@@ -11,6 +11,7 @@ import 'package:plannify/presentation/viewmodel/verify_otp_viewmodel.dart';
 import '../../core/locator/locator.dart';
 import '../../core/router/routes.dart';
 import '../../core/themes/colors.dart';
+import '../../core/widgets/custom_text_button.dart';
 
 class VerifyOtpScreen extends StatefulWidget {
   final String email;
@@ -32,11 +33,8 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
     _viewModel.email = widget.email;
   }
 
-  void _navigateToLogin() {
-    Navigator.of(
-      context,
-    ).pushNamedAndRemoveUntil(RouteManager.login, (route) => false);
-  }
+  void _navigateToLogin() =>
+      context.pushNamedAndRemoveUntil(RouteManager.login);
 
   @override
   Widget build(BuildContext context) {
@@ -93,9 +91,14 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                         state is VerifyOtpError ||
                         state is VerifyOtpTimerExpired,
                     isLoading: state is VerifyOtpLoading,
-                    onCompleted: (val) async => await _viewModel.verifyOtp(),
+                    onCompleted: (val) async => await _viewModel.verifyOtp(val),
                   ),
-                  Gap(size: 20.h),
+                  Gap(size: 25.h),
+                  MyTextButton(
+                    title: 'Back to Login?',
+                    onTap:
+                        () => context.pushReplacementNamed(RouteManager.login),
+                  ).alignCenterRight(),
                 ],
               ).withAllPadding(24),
             ),

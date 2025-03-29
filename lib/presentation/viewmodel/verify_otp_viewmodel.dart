@@ -6,12 +6,11 @@ class VerifyOtpViewModel {
   final VerifyOtpCubit cubit;
 
   String? email;
-  String? otp;
   VerifyOtpViewModel() : cubit = locator<VerifyOtpCubit>();
 
-  Future<void> verifyOtp() async {
+  Future<void> verifyOtp(String otp) async {
     final request = VerifyOtpRequest(
-      otp: otp?.trim() ?? '',
+      otp: otp.trim(),
       email: email?.trim() ?? '',
     );
     await cubit.verifyOtp(request);

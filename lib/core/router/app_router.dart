@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:plannify/presentation/cubit/auth/reset_password/reset_password_cubit.dart';
+import 'package:plannify/presentation/cubit/auth/verify_otp/verify_otp_cubit.dart';
 import 'package:plannify/presentation/view/forgot_password_screen.dart';
 
 import '../../presentation/cubit/auth/forgot_password/forgot_password_cubit.dart';
@@ -9,7 +11,9 @@ import '../../presentation/cubit/onboarding/onboarding_cubit.dart';
 import '../../presentation/view/login_screen.dart';
 import '../../presentation/view/onboarding_screens.dart';
 import '../../presentation/view/register_screen.dart';
+import '../../presentation/view/reset_password_screen.dart';
 import '../../presentation/view/splash_screen.dart';
+import '../../presentation/view/verify_otp_screen.dart';
 import '../locator/locator.dart';
 import 'custom_page_transitions.dart';
 import 'routes.dart';
@@ -46,6 +50,22 @@ class AppRouter {
           BlocProvider(
             create: (_) => locator<ForgotPasswordCubit>(),
             child: const ForgotPasswordScreen(),
+          ),
+        );
+      case RouteManager.verifyOtp:
+        final email = settings.arguments as String;
+        return CustomPageTransitions.fadeForwards(
+          BlocProvider(
+            create: (_) => locator<VerifyOtpCubit>(),
+            child: VerifyOtpScreen(email: email),
+          ),
+        );
+      case RouteManager.resetPassword:
+        final email = settings.arguments as String;
+        return CustomPageTransitions.fadeForwards(
+          BlocProvider(
+            create: (_) => locator<ResetPasswordCubit>(),
+            child: ResetPasswordScreen(email: email),
           ),
         );
 

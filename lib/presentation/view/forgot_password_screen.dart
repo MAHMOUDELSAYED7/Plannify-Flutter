@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:plannify/core/router/routes.dart';
 import 'package:plannify/core/utils/extensions/extensions.dart';
 import 'package:plannify/core/utils/helpers/toast_message.dart';
 import 'package:plannify/core/widgets/custom_text_button.dart';
@@ -29,6 +30,16 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     _viewModel = locator<ForgotPasswordViewModel>();
   }
 
+  void _navigateToResetPassword() => context.pushNamedAndRemoveUntil(
+    RouteManager.resetPassword,
+    arguments: _viewModel.email,
+  );
+  @override
+  void dispose() {
+    _viewModel.formKey.currentState?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<ForgotPasswordCubit, ForgotPasswordState>(
@@ -38,7 +49,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           ToastHelper.showCustomToast(state.message);
         }
         if (state is ForgotPasswordSuccess) {
-          ToastHelper.showCustomToast('Verification email sent!');
+          ToastHelper.showCustomToast(
+            state.response.message ?? 'Verification code sent to your email!',
+          );
+          _navigateToResetPassword();
         }
       },
       child: Scaffold(
