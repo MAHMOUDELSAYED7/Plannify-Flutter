@@ -44,12 +44,13 @@ extension NavigationExtensions on BuildContext {
 
   // Push a named route and remove all previous routes
   Future<T?> pushNamedAndRemoveUntil<T>(
-    String routeName,
-    RoutePredicate predicate, {
+    String routeName, {
     Object? arguments,
-  }) => Navigator.of(
-    this,
-  ).pushNamedAndRemoveUntil<T>(routeName, predicate, arguments: arguments);
+  }) => Navigator.of(this).pushNamedAndRemoveUntil<T>(
+    routeName,
+     (route) => false,
+    arguments: arguments,
+  );
 
   // Try to pop the route; returns true if successful, otherwise false
   Future<bool> maybePop() => Navigator.of(this).maybePop();

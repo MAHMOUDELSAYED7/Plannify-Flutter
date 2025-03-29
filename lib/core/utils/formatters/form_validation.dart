@@ -9,7 +9,7 @@ class FormValidationManager {
 
   static final RegExp usernameRegex = RegExp(r'^[a-zA-Z0-9_]{3,20}$');
 
-  static final RegExp otpRegex = RegExp(r'^\d{6}$');
+  static final RegExp otpRegex = RegExp(r'^\d{4}$');
 
   String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
@@ -63,7 +63,7 @@ Username must:
     if (value == null || value.isEmpty) {
       return 'OTP is required';
     } else if (!otpRegex.hasMatch(value)) {
-      return 'OTP must be 6 digits';
+      return 'OTP must be 4 digits';
     }
     return null;
   }

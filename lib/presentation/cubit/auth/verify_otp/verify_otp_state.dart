@@ -16,3 +16,8 @@ class VerifyOtpError extends VerifyOtpState {
   final String message;
   VerifyOtpError(this.message);
 }
+
+class VerifyOtpTimerExpired extends VerifyOtpState {
+  final String message;
+  VerifyOtpTimerExpired(this.message);
+}

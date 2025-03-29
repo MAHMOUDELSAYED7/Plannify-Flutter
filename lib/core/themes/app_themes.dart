@@ -125,6 +125,13 @@ class AppTheme {
             width: 1.5,
           ),
         ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.r),
+          borderSide: const BorderSide(
+            color: ColorManager.grayDark,
+            width: 1.5,
+          ),
+        ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
           borderSide: const BorderSide(
