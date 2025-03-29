@@ -16,3 +16,7 @@ class ResetPasswordError extends ResetPasswordState {
   final String message;
   ResetPasswordError(this.message);
 }
+class VerifyOtpTimerExpired extends ResetPasswordState {
+  final String message;
+  VerifyOtpTimerExpired(this.message);
+}

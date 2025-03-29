@@ -88,6 +88,7 @@ class _MyOtpFieldState extends State<MyOtpField> {
         ),
       ),
       pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
+      onClipboardFound: (value) => controller.setText(value),
       onCompleted: (pin) {
         if (widget.onCompleted != null) {
           widget.onCompleted!(pin);
