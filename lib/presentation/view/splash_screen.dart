@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plannify/core/constants/font_size.dart';
 import 'package:plannify/core/constants/images.dart';
-import 'package:plannify/core/locator/locator.dart';
 import 'package:plannify/core/utils/extensions/extensions.dart';
 import 'package:plannify/core/utils/helpers/image_handler.dart';
-import 'package:plannify/presentation/viewmodel/splash_viewmodel.dart';
+import 'package:plannify/presentation/cubit/auth/auth_status/auth_status_cubit.dart';
 
+import '../../core/router/routes.dart';
 import '../../core/themes/colors.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -14,25 +15,35 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    locator<SplashViewModel>().redirect(context);
-    return Scaffold(
-      backgroundColor: ColorManager.primary,
+    return BlocListener<AuthStatusCubit, AuthStatusState>(
+      listener: (context, state) {
+        if (state is AuthStatusAuthenticated) {
+          context.pushNamedAndRemoveUntil(RouteManager.home);
+        } else if (state is AuthStatusUnauthenticated) {
+          context.pushNamedAndRemoveUntil(RouteManager.onboarding);
+        } else if (state is AuthStatusError) {
+          context.pushNamedAndRemoveUntil(RouteManager.login);
+        }
+      },
+      child: Scaffold(
+        backgroundColor: ColorManager.primary,
 
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          ImageHandler.image(ImageManager.splashLogo).center(),
-          Text(
-            "Plannify",
-            style: context.textTheme.titleLarge?.copyWith(
-              fontSize: FontSizeManager.large * 1.4,
-            ),
-          ).withOnlyPadding(top: 100.sp),
-          Text(
-            "The best to do list application for you",
-            style: context.textTheme.titleMedium,
-          ).center().positionedBottom(bottom: 50.sp),
-        ],
+        body: Stack(
+          alignment: Alignment.center,
+          children: [
+            ImageHandler.image(ImageManager.splashLogo).center(),
+            Text(
+              "Plannify",
+              style: context.textTheme.titleLarge?.copyWith(
+                fontSize: FontSizeManager.large * 1.4,
+              ),
+            ).withOnlyPadding(top: 100.sp),
+            Text(
+              "The best to do list application for you",
+              style: context.textTheme.titleMedium,
+            ).center().positionedBottom(bottom: 50.sp),
+          ],
+        ),
       ),
     );
   }
