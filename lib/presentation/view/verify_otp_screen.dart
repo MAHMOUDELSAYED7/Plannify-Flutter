@@ -6,12 +6,11 @@ import 'package:plannify/core/utils/helpers/toast_message.dart';
 import 'package:plannify/core/widgets/custom_gap.dart';
 import 'package:plannify/core/widgets/custom_otp_field.dart';
 import 'package:plannify/presentation/cubit/auth/verify_otp/verify_otp_cubit.dart';
-import 'package:plannify/presentation/viewmodel/verify_otp_viewmodel.dart';
 
-import '../../core/locator/locator.dart';
 import '../../core/router/routes.dart';
 import '../../core/themes/colors.dart';
 import '../../core/widgets/custom_text_button.dart';
+import '../../data/models/auth_model.dart';
 
 class VerifyOtpScreen extends StatefulWidget {
   final String email;
@@ -23,14 +22,21 @@ class VerifyOtpScreen extends StatefulWidget {
 }
 
 class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
-  late final VerifyOtpViewModel _viewModel;
+  String? _email;
+
+  Future<void> _verifyOtp(String otp) async {
+    final request = VerifyOtpRequest(
+      otp: otp.trim(),
+      email: _email?.trim() ?? '',
+    );
+    await context.cubit<VerifyOtpCubit>().verifyOtp(request);
+  }
 
   @override
   void initState() {
     super.initState();
-    _viewModel = locator<VerifyOtpViewModel>();
-    _viewModel.cubit.startOtpExpirationTimer();
-    _viewModel.email = widget.email;
+    context.cubit<VerifyOtpCubit>().startOtpExpirationTimer();
+    _email = widget.email;
   }
 
   void _navigateToLogin() =>
@@ -39,7 +45,6 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<VerifyOtpCubit, VerifyOtpState>(
-      bloc: _viewModel.cubit,
       listener: (context, state) {
         if (state is VerifyOtpError) {
           ToastHelper.showCustomToast(state.message);
@@ -91,7 +96,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                         state is VerifyOtpError ||
                         state is VerifyOtpTimerExpired,
                     isLoading: state is VerifyOtpLoading,
-                    onCompleted: (val) async => await _viewModel.verifyOtp(val),
+                    onCompleted: (val) async => await _verifyOtp(val),
                   ),
                   Gap(size: 25.h),
                   MyTextButton(

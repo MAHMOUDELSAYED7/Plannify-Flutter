@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:plannify/core/constants/font_family.dart';
 import 'package:plannify/core/constants/font_size.dart';
 
 import 'colors.dart';
@@ -11,8 +10,7 @@ class AppTheme {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           textStyle: TextStyle(
-            fontSize: FontSizeManager.medium + 2.sp,
-            fontFamily: FontFamilyManager.sfProDisplay,
+            fontSize: FontSizeManager.medium.sp ,
           ),
           fixedSize: Size(double.maxFinite, 54.h),
           shape: RoundedRectangleBorder(
@@ -41,13 +39,11 @@ class AppTheme {
       brightness: Brightness.light,
       scaffoldBackgroundColor: ColorManager.backgroundLight,
 
-      fontFamily: FontFamilyManager.sfProDisplay,
       //-----------------------------------------------------------//* APP BAR
       appBarTheme: AppBarTheme(
         titleTextStyle: TextStyle(
           color: ColorManager.black,
           fontSize: 20.sp,
-          fontFamily: FontFamilyManager.sfProDisplay,
         ),
         backgroundColor: ColorManager.transparent,
         centerTitle: true,
@@ -61,31 +57,31 @@ class AppTheme {
       //-----------------------------------------------------------//* TEXT
       textTheme: TextTheme(
         bodyLarge: TextStyle(
-          fontSize: FontSizeManager.large,
+          fontSize: FontSizeManager.large.sp,
           color: ColorManager.black,
           fontWeight: FontWeight.w600,
         ),
         bodyMedium: TextStyle(
-          fontSize: FontSizeManager.medium,
+          fontSize: FontSizeManager.medium.sp,
           color: ColorManager.black,
           fontWeight: FontWeight.w500,
         ),
         bodySmall: TextStyle(
-          fontSize: FontSizeManager.small,
+          fontSize: FontSizeManager.small.sp,
           color: ColorManager.black,
         ),
         titleLarge: TextStyle(
-          fontSize: FontSizeManager.large,
+          fontSize: FontSizeManager.large.sp,
           color: ColorManager.white,
           fontWeight: FontWeight.w600,
         ),
         titleMedium: TextStyle(
-          fontSize: FontSizeManager.medium,
+          fontSize: FontSizeManager.medium.sp,
           color: ColorManager.white,
           fontWeight: FontWeight.w500,
         ),
         titleSmall: TextStyle(
-          fontSize: FontSizeManager.small,
+          fontSize: FontSizeManager.small.sp,
           color: ColorManager.white,
         ),
       ),

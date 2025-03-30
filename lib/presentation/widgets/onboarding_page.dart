@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plannify/core/utils/extensions/extensions.dart';
 
-import '../../../core/constants/font_size.dart';
-import '../../../core/themes/colors.dart';
-import '../../../core/utils/helpers/image_handler.dart';
-import '../../../core/widgets/custom_gap.dart';
-import '../../../data/models/onboarding_page_model.dart';
+import '../../core/constants/font_size.dart';
+import '../../core/themes/colors.dart';
+import '../../core/utils/helpers/image_handler.dart';
+import '../../core/widgets/custom_gap.dart';
+import '../../data/models/onboarding_page_model.dart';
 
 class OnboardingPageWidget extends StatelessWidget {
   final OnboardingPage page;
@@ -28,7 +29,7 @@ class OnboardingPageWidget extends StatelessWidget {
               Text(
                 page.title,
                 style: context.textTheme.bodyLarge?.copyWith(
-                  fontSize: FontSizeManager.large * 1.3,
+                  fontSize: FontSizeManager.large.sp * 1.3,
                   fontWeight: FontWeight.w600,
                 ),
                 textAlign: TextAlign.center,
@@ -37,7 +38,7 @@ class OnboardingPageWidget extends StatelessWidget {
               Text(
                 page.description,
                 style: context.textTheme.bodyMedium?.copyWith(
-                  fontSize: FontSizeManager.medium * 0.85,
+                  fontSize: FontSizeManager.medium.sp * 0.85,
                   color: ColorManager.grayDark,
                 ),
                 textAlign: TextAlign.center,

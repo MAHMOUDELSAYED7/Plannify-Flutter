@@ -6,7 +6,7 @@ import '../../security/secure_storage_repository.dart';
 class AuthInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    locator<SecureStorageManager>()
+    sl<SecureStorageManager>()
         .getAuthToken()
         .then((token) {
           if (token != null) {

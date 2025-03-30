@@ -35,7 +35,7 @@ class SplashScreen extends StatelessWidget {
             Text(
               "Plannify",
               style: context.textTheme.titleLarge?.copyWith(
-                fontSize: FontSizeManager.large * 1.4,
+                fontSize: FontSizeManager.large.sp * 1.4,
               ),
             ).withOnlyPadding(top: 100.sp),
             Text(
