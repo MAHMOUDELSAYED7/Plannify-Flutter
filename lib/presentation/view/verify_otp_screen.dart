@@ -30,6 +30,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
       email: _email?.trim() ?? '',
     );
     await context.cubit<VerifyOtpCubit>().verifyOtp(request);
+    otp = '';
   }
 
   @override

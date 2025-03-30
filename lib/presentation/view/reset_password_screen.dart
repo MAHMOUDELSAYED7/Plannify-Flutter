@@ -29,14 +29,15 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   late final GlobalKey<FormState> _formKey;
   late final FormValidationManager _formValidationManager;
   String? _email;
+  String? _otp;
   String? _newPassword;
 
-  Future<void> resetPassword(String otp) async {
+  Future<void> _resetPassword() async {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
       final request = ResetPasswordRequest(
         email: _email?.trim() ?? '',
-        otp: otp.trim(),
+        otp: _otp?.trim() ?? '',
         newPassword: _newPassword?.trim() ?? '',
       );
       await context.cubit<ResetPasswordCubit>().resetPassword(request);
@@ -49,9 +50,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     _formKey = GlobalKey<FormState>();
     _formValidationManager = sl<FormValidationManager>();
     _email = widget.email;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.cubit<ResetPasswordCubit>().startOtpExpirationTimer();
-    });
+    context.cubit<ResetPasswordCubit>().startOtpExpirationTimer();
   }
 
   @override
@@ -74,9 +73,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             'Password reset successfully!, you can login now.',
           );
           _navigateToLogin();
-        }
-        if (state is ResetPasswordLoading) {
-          ToastHelper.showCustomToast('Loading...');
         }
         if (state is VerifyOtpTimerExpired) {
           ToastHelper.showCustomToast('Timer expired!');
@@ -110,7 +106,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         state is ResetPasswordError ||
                         state is VerifyOtpTimerExpired,
                     isLoading: state is ResetPasswordLoading,
-                    onCompleted: (val) async => await resetPassword(val),
+                    onCompleted: (val) => _otp = val,
                   ),
                   Gap(size: 24.h),
                   Form(
@@ -149,10 +145,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             ),
           ),
           bottomNavigationBar: MyElevatedButton(
-            onPressed:
-                state is ResetPasswordLoading
-                    ? null
-                    : () => resetPassword(widget.email),
+            onPressed: state is ResetPasswordLoading ? null : _resetPassword,
             title: 'Reset Password',
             isLoading: state is ResetPasswordLoading,
           ).withOnlyPadding(

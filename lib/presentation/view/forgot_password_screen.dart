@@ -28,7 +28,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   late final FormValidationManager _formValidationManager;
   String? _email;
 
-  Future<void> forgotPassword() async {
+  Future<void> _forgotPassword() async {
     if (_formKey.currentState?.validate() ?? false) {
       _formKey.currentState?.save();
       final request = ForgotPasswordRequest(email: _email?.trim() ?? '');
@@ -112,7 +112,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               builder: (context, state) {
                 return MyElevatedButton(
                   onPressed:
-                      state is ForgotPasswordLoading ? null : forgotPassword,
+                      state is ForgotPasswordLoading ? null : _forgotPassword,
                   title: 'Forgot Password',
                   isLoading: state is ForgotPasswordLoading,
                 ).withOnlyPadding(
