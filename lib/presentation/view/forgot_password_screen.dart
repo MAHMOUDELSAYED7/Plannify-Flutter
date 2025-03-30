@@ -12,6 +12,7 @@ import '../../core/locator/locator.dart';
 import '../../core/themes/colors.dart';
 import '../../core/utils/formatters/form_validation.dart';
 import '../../core/widgets/custom_elevated_button.dart';
+import '../../core/widgets/custom_gap.dart';
 import '../../core/widgets/custom_text_form_field.dart';
 import '../../data/models/auth_model.dart';
 
@@ -67,41 +68,45 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         }
       },
       child: Scaffold(
-        body: Column(
-          children: [
-            Text(
-              'Forgot Password',
-              style: context.textTheme.bodyLarge?.copyWith(
-                fontSize: FontSizeManager.large.sp + 4.sp,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Text(
+                'Forgot Password',
+                style: context.textTheme.bodyLarge?.copyWith(
+                  fontSize: FontSizeManager.large.sp + 4.sp,
+                ),
+              ).center().withOnlyPadding(top: 50.h),
+              Text(
+                'Please enter your email to reset your password',
+                style: context.textTheme.bodyMedium?.copyWith(
+                  fontSize: FontSizeManager.medium.sp,
+                  color: ColorManager.grayDark,
+                ),
+                textAlign: TextAlign.center,
+              ).withOnlyPadding(top: 4),
+              Gap(size: 24.h),
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    MyTextFormField(
+                      keyboardType: TextInputType.emailAddress,
+                      onSaved: (val) => _email = val,
+                      title: 'Email',
+                      hintText: 'Enter your email',
+                      validator: _formValidationManager.validateEmail,
+                    ).withOnlyPadding(bottom: 16.h),
+                  ],
+                ),
               ),
-            ).center().withOnlyPadding(top: 50.h),
-            Text(
-              'Please enter your email to reset your password',
-              style: context.textTheme.bodyMedium?.copyWith(
-                fontSize: FontSizeManager.medium.sp,
-                color: ColorManager.grayDark,
-              ),
-              textAlign: TextAlign.center,
-            ).withOnlyPadding(top: 4),
-            Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  MyTextFormField(
-                    onSaved: (val) => _email = val,
-                    title: 'Email',
-                    hintText: 'Enter your email',
-                    validator: _formValidationManager.validateEmail,
-                  ).withOnlyPadding(bottom: 16.h),
-                ],
-              ),
-            ),
-            MyTextButton(
-              title: 'Back to Login?',
-              onTap: () => context.back(),
-            ).alignCenterRight(),
-          ],
-        ).withAllPadding(24),
+              MyTextButton(
+                title: 'Back to Login?',
+                onTap: () => context.back(),
+              ).alignCenterRight(),
+            ],
+          ).withAllPadding(24),
+        ),
         bottomNavigationBar:
             BlocBuilder<ForgotPasswordCubit, ForgotPasswordState>(
               builder: (context, state) {

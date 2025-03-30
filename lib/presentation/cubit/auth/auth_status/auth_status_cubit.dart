@@ -9,9 +9,7 @@ part 'auth_status_state.dart';
 class AuthStatusCubit extends Cubit<AuthStatusState> {
   final SecureStorageManager _secureStorage;
 
-  AuthStatusCubit(this._secureStorage) : super(AuthStatusInitial()) {
-    checkAuthStatus();
-  }
+  AuthStatusCubit(this._secureStorage) : super(AuthStatusInitial());
 
   Future<void> checkAuthStatus() async {
     emit(AuthStatusLoading());

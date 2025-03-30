@@ -14,9 +14,12 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> login(LoginRequest request) async {
     emit(LoginLoading());
     final result = await repository.login(request);
-    result.fold(
-      (failure) => emit(LoginError(failure.message)),
-      (response) => emit(LoginSuccess(response)),
-    );
+    result.fold((failure) {
+      if (failure.code == 403) {
+        emit(EmailNotVerified(failure.message));
+        return;
+      }
+      emit(LoginError(failure.message));
+    }, (response) => emit(LoginSuccess(response)));
   }
 }

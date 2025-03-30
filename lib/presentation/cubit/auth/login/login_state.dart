@@ -12,6 +12,11 @@ class LoginSuccess extends LoginState {
   LoginSuccess(this.response);
 }
 
+class EmailNotVerified extends LoginState {
+  final String message;
+  EmailNotVerified(this.message);
+}
+
 class LoginError extends LoginState {
   final String message;
   LoginError(this.message);

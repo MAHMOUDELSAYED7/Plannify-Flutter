@@ -15,8 +15,13 @@ class RegisterCubit extends Cubit<RegisterState> {
     emit(RegisterLoading());
     final result = await repository.register(request);
     result.fold(
-      (failure) =>
-          emit(RegisterError(failure.message)),
+      (failure) {
+          if (failure.code == 403) {
+        emit(EmailNotVerified(failure.message));
+        return;
+      }
+        emit(RegisterError(failure.message));
+      },
       (response) => emit(RegisterSuccess(response)),
     );
   }

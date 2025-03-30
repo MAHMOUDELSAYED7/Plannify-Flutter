@@ -47,7 +47,7 @@ class AuthRepositoryImpl implements IAuthRepository {
       await _secureStorage.saveAuthToken(authResponse.token!);
       return Right(authResponse);
     } on NetworkException catch (err) {
-      return Left(NetworkFailure(err.message));
+      return Left(NetworkFailure(err.message, err.statusCode));
     } catch (err) {
       return Left(ServerFailure('Login failed'));
     }
@@ -66,7 +66,7 @@ class AuthRepositoryImpl implements IAuthRepository {
       final authResponse = AuthResponse.fromJson(response.data);
       return Right(authResponse);
     } on NetworkException catch (err) {
-      return Left(NetworkFailure(err.message));
+      return Left(NetworkFailure(err.message, err.statusCode));
     } catch (err) {
       return Left(ServerFailure('Registration failed'));
     }
@@ -85,7 +85,7 @@ class AuthRepositoryImpl implements IAuthRepository {
       final authResponse = AuthResponse.fromJson(response.data);
       return Right(authResponse);
     } on NetworkException catch (err) {
-      return Left(NetworkFailure(err.message));
+      return Left(NetworkFailure(err.message, err.statusCode));
     } catch (err) {
       return Left(ServerFailure('OTP verification failed'));
     }
@@ -104,7 +104,7 @@ class AuthRepositoryImpl implements IAuthRepository {
       final authResponse = AuthResponse.fromJson(response.data);
       return Right(authResponse);
     } on NetworkException catch (err) {
-      return Left(NetworkFailure(err.message));
+      return Left(NetworkFailure(err.message, err.statusCode));
     } catch (err) {
       return Left(ServerFailure('Password reset failed'));
     }
@@ -123,7 +123,7 @@ class AuthRepositoryImpl implements IAuthRepository {
       final authResponse = AuthResponse.fromJson(response.data);
       return Right(authResponse);
     } on NetworkException catch (err) {
-      return Left(NetworkFailure(err.message));
+      return Left(NetworkFailure(err.message, err.statusCode));
     } catch (err) {
       return Left(ServerFailure('Password reset failed'));
     }

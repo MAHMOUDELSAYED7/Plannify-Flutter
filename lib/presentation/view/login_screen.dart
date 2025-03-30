@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plannify/core/utils/extensions/extensions.dart';
 import 'package:plannify/core/utils/helpers/toast_message.dart';
+import 'package:plannify/core/widgets/custom_gap.dart';
 import 'package:plannify/core/widgets/custom_text_button.dart';
 
 import '../../core/constants/font_size.dart';
@@ -64,54 +65,67 @@ class _LoginScreenState extends State<LoginScreen> {
           ToastHelper.showCustomToast('Login successful!');
           context.pushNamedAndRemoveUntil(RouteManager.home);
         }
+        if (state is EmailNotVerified) {
+          ToastHelper.showCustomToast(state.message);
+          context.pushNamedAndRemoveUntil(
+            RouteManager.verifyOtp,
+            arguments: _email,
+          );
+        }
       },
       child: Scaffold(
-        body: Column(
-          children: [
-            Text(
-              'Welcome Back!',
-              style: context.textTheme.bodyLarge?.copyWith(
-                fontSize: FontSizeManager.large.sp + 4.sp,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Text(
+                'Welcome Back!',
+                style: context.textTheme.bodyLarge?.copyWith(
+                  fontSize: FontSizeManager.large.sp + 4.sp,
+                ),
+              ).center().withOnlyPadding(top: 50.h),
+              Text(
+                'please Log in to access your account',
+                style: context.textTheme.bodyMedium?.copyWith(
+                  fontSize: FontSizeManager.medium.sp,
+                  color: ColorManager.grayDark,
+                ),
+                textAlign: TextAlign.center,
+              ).withOnlyPadding(top: 4),
+              Gap(size: 24.h),
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    MyTextFormField(
+                      keyboardType: TextInputType.emailAddress,
+                      onSaved: (val) => _email = val,
+                      title: 'Email',
+                      hintText: 'Enter your email',
+                      validator: _formValidationManager.validateEmail,
+                    ).withOnlyPadding(bottom: 16.h),
+                    MyTextFormField(
+                      keyboardType: TextInputType.visiblePassword,
+                      title: 'Password',
+                      hintText: 'Enter your password',
+                      obscureText: true,
+                      onSaved: (val) => _password = val,
+                      validator: _formValidationManager.validatePassword,
+                    ).withOnlyPadding(bottom: 16.h),
+                    MyTextButton(
+                      title: 'Forgot Password?',
+                      onTap:
+                          () => context.pushNamed(RouteManager.forgotPassword),
+                    ).alignCenterRight(),
+                    MyTextButton(
+                      title: 'Create an account?',
+                      onTap: () => context.pushNamed(RouteManager.register),
+                    ).alignCenterRight(),
+                  ],
+                ),
               ),
-            ).center().withOnlyPadding(top: 50.h),
-            Text(
-              'please Log in to access your account',
-              style: context.textTheme.bodyMedium?.copyWith(
-                fontSize: FontSizeManager.medium.sp,
-                color: ColorManager.grayDark,
-              ),
-              textAlign: TextAlign.center,
-            ).withOnlyPadding(top: 4),
-            Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  MyTextFormField(
-                    onSaved: (val) => _email = val,
-                    title: 'Email',
-                    hintText: 'Enter your email',
-                    validator: _formValidationManager.validateEmail,
-                  ).withOnlyPadding(bottom: 16.h),
-                  MyTextFormField(
-                    title: 'Password',
-                    hintText: 'Enter your password',
-                    obscureText: true,
-                    onSaved: (val) => _password = val,
-                    validator: _formValidationManager.validatePassword,
-                  ).withOnlyPadding(bottom: 16.h),
-                  MyTextButton(
-                    title: 'Forgot Password?',
-                    onTap: () => context.pushNamed(RouteManager.forgotPassword),
-                  ).alignCenterRight(),
-                  MyTextButton(
-                    title: 'Create an account?',
-                    onTap: () => context.pushNamed(RouteManager.register),
-                  ).alignCenterRight(),
-                ],
-              ),
-            ),
-          ],
-        ).withAllPadding(24),
+            ],
+          ).withAllPadding(24),
+        ),
         bottomNavigationBar: BlocBuilder<LoginCubit, LoginState>(
           builder: (context, state) {
             return MyElevatedButton(

@@ -11,6 +11,7 @@ import '../../core/router/routes.dart';
 import '../../core/themes/colors.dart';
 import '../../core/utils/formatters/form_validation.dart';
 import '../../core/widgets/custom_elevated_button.dart';
+import '../../core/widgets/custom_gap.dart';
 import '../../core/widgets/custom_text_form_field.dart';
 import '../../data/models/auth_model.dart';
 
@@ -69,52 +70,65 @@ class _RegisterScreenState extends State<RegisterScreen> {
             arguments: _email,
           );
         }
+        if (state is EmailNotVerified) {
+          ToastHelper.showCustomToast(state.message);
+          context.pushNamedAndRemoveUntil(
+            RouteManager.verifyOtp,
+            arguments: _email,
+          );
+        }
       },
       child: Scaffold(
-        body: Column(
-          children: [
-            Text(
-              'Create account',
-              style: context.textTheme.bodyLarge?.copyWith(
-                fontSize: FontSizeManager.large.sp + 4.sp,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Text(
+                'Create account',
+                style: context.textTheme.bodyLarge?.copyWith(
+                  fontSize: FontSizeManager.large.sp + 4.sp,
+                ),
+              ).center().withOnlyPadding(top: 50.h),
+              Text(
+                'Create your account and feel the benefits',
+                style: context.textTheme.bodyMedium?.copyWith(
+                  fontSize: FontSizeManager.medium.sp,
+                  color: ColorManager.grayDark,
+                ),
+                textAlign: TextAlign.center,
+              ).withOnlyPadding(top: 4),
+              Gap(size: 24.h),
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    MyTextFormField(
+                      keyboardType: TextInputType.name,
+                      onSaved: (val) => _username = val,
+                      title: 'Username',
+                      hintText: 'Enter your username',
+                      validator: _formValidationManager.validateUsername,
+                    ).withOnlyPadding(bottom: 16.h),
+                    MyTextFormField(
+                      keyboardType: TextInputType.emailAddress,
+                      onSaved: (val) => _email = val,
+                      title: 'Email',
+                      hintText: 'Enter your email',
+                      validator: _formValidationManager.validateEmail,
+                    ).withOnlyPadding(bottom: 16.h),
+                    MyTextFormField(
+                      keyboardType: TextInputType.visiblePassword,
+                      title: 'Password',
+                      hintText: 'Enter your password',
+                      obscureText: true,
+                      onSaved: (val) => _password = val,
+                      validator: _formValidationManager.validatePassword,
+                    ).withOnlyPadding(bottom: 16.h),
+                  ],
+                ),
               ),
-            ).center().withOnlyPadding(top: 50.h),
-            Text(
-              'Create your account and feel the benefits',
-              style: context.textTheme.bodyMedium?.copyWith(
-                fontSize: FontSizeManager.medium.sp,
-                color: ColorManager.grayDark,
-              ),
-              textAlign: TextAlign.center,
-            ).withOnlyPadding(top: 4),
-            Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  MyTextFormField(
-                    onSaved: (val) => _username = val,
-                    title: 'Username',
-                    hintText: 'Enter your username',
-                    validator: _formValidationManager.validateUsername,
-                  ).withOnlyPadding(bottom: 16.h),
-                  MyTextFormField(
-                    onSaved: (val) => _email = val,
-                    title: 'Email',
-                    hintText: 'Enter your email',
-                    validator: _formValidationManager.validateEmail,
-                  ).withOnlyPadding(bottom: 16.h),
-                  MyTextFormField(
-                    title: 'Password',
-                    hintText: 'Enter your password',
-                    obscureText: true,
-                    onSaved: (val) => _password = val,
-                    validator: _formValidationManager.validatePassword,
-                  ).withOnlyPadding(bottom: 16.h),
-                ],
-              ),
-            ),
-          ],
-        ).withAllPadding(24),
+            ],
+          ).withAllPadding(24),
+        ),
         bottomNavigationBar: BlocBuilder<RegisterCubit, RegisterState>(
           builder: (context, state) {
             return MyElevatedButton(

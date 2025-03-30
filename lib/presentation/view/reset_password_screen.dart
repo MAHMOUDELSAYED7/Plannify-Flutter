@@ -112,12 +112,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     isLoading: state is ResetPasswordLoading,
                     onCompleted: (val) async => await resetPassword(val),
                   ),
-                  Gap(size: 25.h),
+                  Gap(size: 24.h),
                   Form(
                     key: _formKey,
                     child: Column(
                       children: [
                         MyTextFormField(
+                          keyboardType: TextInputType.visiblePassword,
                           title: 'New Password',
                           hintText: 'Enter your password',
                           obscureText: true,
@@ -125,6 +126,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                           validator: _formValidationManager.validatePassword,
                         ).withOnlyPadding(bottom: 16.h),
                         MyTextFormField(
+                          keyboardType: TextInputType.visiblePassword,
                           title: 'Confirm Password',
                           hintText: 'Enter your password',
                           obscureText: true,

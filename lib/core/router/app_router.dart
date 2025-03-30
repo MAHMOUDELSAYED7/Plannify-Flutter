@@ -27,7 +27,7 @@ class AppRouter {
       case RouteManager.initialRoute:
         return CustomPageTransitions.fade(
           BlocProvider(
-            create: (_) => sl<AuthStatusCubit>(),
+            create: (_) => sl<AuthStatusCubit>()..checkAuthStatus(),
             child: const SplashScreen(),
           ),
         );
@@ -40,10 +40,7 @@ class AppRouter {
         );
       case RouteManager.login:
         return CustomPageTransitions.fadeForwards(
-          BlocProvider(
-            create: (_) => sl<LoginCubit>(),
-            child: LoginScreen(),
-          ),
+          BlocProvider(create: (_) => sl<LoginCubit>(), child: LoginScreen()),
         );
       case RouteManager.register:
         return CustomPageTransitions.fadeForwards(

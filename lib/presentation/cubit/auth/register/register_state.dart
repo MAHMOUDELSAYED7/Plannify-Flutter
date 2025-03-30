@@ -12,6 +12,11 @@ class RegisterSuccess extends RegisterState {
   RegisterSuccess(this.response);
 }
 
+class EmailNotVerified extends RegisterState {
+  final String message;
+  EmailNotVerified(this.message);
+}
+
 class RegisterError extends RegisterState {
   final String message;
   RegisterError(this.message);
