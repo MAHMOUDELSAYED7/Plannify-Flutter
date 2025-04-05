@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:plannify/core/utils/extensions/extensions.dart';
 
-import '../../core/constants/font_size.dart';
+import '../../core/themes/constants/font_size.dart';
 import '../../core/themes/colors.dart';
 import '../../core/utils/helpers/image_handler.dart';
 import '../../core/widgets/custom_gap.dart';

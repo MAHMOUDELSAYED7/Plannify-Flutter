@@ -6,7 +6,7 @@ import 'package:plannify/core/utils/helpers/toast_message.dart';
 import 'package:plannify/core/widgets/custom_text_button.dart';
 import 'package:plannify/presentation/cubit/auth/reset_password/reset_password_cubit.dart';
 
-import '../../core/constants/font_size.dart';
+import '../../core/themes/constants/font_size.dart';
 import '../../core/locator/locator.dart';
 import '../../core/router/routes.dart';
 import '../../core/themes/colors.dart';

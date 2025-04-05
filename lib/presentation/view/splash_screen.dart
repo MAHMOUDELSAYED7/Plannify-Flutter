@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:plannify/core/constants/font_size.dart';
-import 'package:plannify/core/constants/images.dart';
+import 'package:plannify/core/themes/constants/font_size.dart';
+import 'package:plannify/core/themes/constants/images.dart';
 import 'package:plannify/core/utils/extensions/extensions.dart';
 import 'package:plannify/core/utils/helpers/image_handler.dart';
 import 'package:plannify/presentation/cubit/auth/auth_status/auth_status_cubit.dart';
