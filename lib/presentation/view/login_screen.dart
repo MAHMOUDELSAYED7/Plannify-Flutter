@@ -6,7 +6,7 @@ import 'package:plannify/core/utils/helpers/toast_message.dart';
 import 'package:plannify/core/widgets/custom_gap.dart';
 import 'package:plannify/core/widgets/custom_text_button.dart';
 
-import '../../core/themes/constants/font_size.dart';
+import '../../core/utils/constants/font_size.dart';
 import '../../core/locator/locator.dart';
 import '../../core/router/routes.dart';
 import '../../core/themes/colors.dart';

@@ -4,7 +4,7 @@ import 'package:plannify/core/router/routes.dart';
 import 'package:plannify/core/utils/extensions/extensions.dart';
 import 'package:plannify/core/widgets/custom_text_button.dart';
 
-import '../../core/themes/constants/images.dart';
+import '../../core/utils/constants/images.dart';
 import '../../core/widgets/custom_elevated_button.dart';
 import '../../data/models/onboarding_page_model.dart';
 import '../cubit/onboarding/onboarding_cubit.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:plannify/core/themes/constants/font_size.dart';
+import 'package:plannify/core/utils/constants/font_size.dart';
 
 import 'colors.dart';
 

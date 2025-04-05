@@ -5,7 +5,7 @@ import 'package:plannify/core/utils/extensions/extensions.dart';
 import 'package:plannify/core/utils/helpers/toast_message.dart';
 import 'package:plannify/presentation/cubit/auth/register/register_cubit.dart';
 
-import '../../core/themes/constants/font_size.dart';
+import '../../core/utils/constants/font_size.dart';
 import '../../core/locator/locator.dart';
 import '../../core/router/routes.dart';
 import '../../core/themes/colors.dart';

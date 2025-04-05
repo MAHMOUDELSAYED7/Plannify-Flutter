@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:plannify/core/themes/constants/images.dart';
+import 'package:plannify/core/utils/constants/images.dart';
 import 'package:plannify/core/utils/extensions/extensions.dart';
 import 'package:plannify/core/utils/helpers/image_handler.dart';
 
